@@ -23,3 +23,4 @@ Run `./backup_server` to stop the running server, create a backup, and then brin
 Once a server is running, run `./get_server_join_code` to get the six-digit server join code
 
 This project is not associated with IronGate, Valheim, Valve, or Steam in any way
+`start_server.sh` and `docker_start_server.sh` are modified from their respective files provided by IronGate
