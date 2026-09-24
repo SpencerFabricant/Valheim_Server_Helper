@@ -8,6 +8,7 @@ This project requires Docker to run
 1. If the server software needs to be updated, re-run `./update_server`
 
 Backups are stored as `.gz` files in `backups`.
+
 To decompress them, copy them to an empty directory and run `tar -xzf [name].gz`
 
 # More verbose:
