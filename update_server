@@ -1,0 +1,67 @@
+#!/bin/bash
+
+if [ ! -f server/server_env ]; then
+  cp server/server_env.example server/server_env
+fi
+
+source .common_env
+
+
+mkdir tmp
+for f in $IMPORTANT_SERVER_FILES; do
+	cp server/$f tmp/$f
+done;
+
+set -v
+
+
+docker stop valheim_server > /dev/null 2>&1 &
+stop_server_pid=$!
+
+
+if ! docker container inspect steamcmd > /dev/null 2>&1
+then
+  # create the steamcmd container
+  docker run -it -d --name=steamcmd cm2network/steamcmd
+  docker exec -i steamcmd ./steamcmd.sh <<< "login anonymous
+      exit"
+else
+  docker start steamcmd
+fi
+
+
+docker exec -i steamcmd ./steamcmd.sh <<< "login anonymous
+    app_update 896660
+    exit
+    " &
+steam_update_pid=$!
+
+wait $stop_server_pid
+./backup_server --no-docker
+
+rm -rf server.old
+mv server server.old
+
+wait $steam_update_pid
+
+docker cp "steamcmd:/home/steam/Steam/steamapps/common/Valheim dedicated server" server
+
+docker stop steamcmd &
+stop_steamcmd_pid=$!
+
+for f in $IMPORTANT_SERVER_FILES; do
+	cp tmp/$f server/$f
+done
+
+rm -rf tmp
+
+
+if ! docker container inspect valheim_server > /dev/null 2>&1
+then
+  cd server
+  ./docker_start_server.sh
+else
+  docker start valheim_server
+fi
+
+wait $stop_steamcmd_pid

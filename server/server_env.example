@@ -1,0 +1,7 @@
+SERVER_NAME=example_server_name
+SERVER_PORT=2456
+SERVER_WORLD=example_server_world_name
+SERVER_PASSWORD=example_password
+
+# This should be a relative path.  NO SPACES!
+SERVER_LOGFILE=server_log.txt

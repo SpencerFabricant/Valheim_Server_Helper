@@ -1,0 +1,28 @@
+#!/bin/bash
+
+source .common_env
+
+downup_docker="TRUE"
+
+if [[ $1 == "--no-docker" ]]; then
+	downup_docker=
+fi
+
+if [ ! -d backups ]; then mkdir backups; fi
+if [ ! -d saves ]; then mkdir saves; fi
+if [ ! -f "server/$SERVER_LOG" ]; then touch "server/$SERVER_LOG"; fi
+if [ $downup_docker ]; then
+	docker stop valheim_server
+fi
+
+mkdir important_files
+for f in $IMPORTANT_SERVER_FILES; do
+	cp server/$f important_files/$f
+done
+
+tar -czf backups/saves_$(date '+%Y-%m-%d_%H.%M.%S').gz saves important_files
+rm -rf important_files
+# unzip with `tar -xzf file.gz`
+if [ $downup_docker ]; then
+	docker start valheim_server
+fi
