@@ -1,0 +1,7 @@
+SERVER_NAME=ExampleServerName
+SERVER_PORT=2456
+SERVER_WORLD=ExampleWorldName
+SERVER_PASSWORD=thisisthepasswordpleasechangeit
+
+# Relative path only.  No spaces
+SERVER_LOGFILE=valheim_server.log
