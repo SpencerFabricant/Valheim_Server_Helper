@@ -5,5 +5,6 @@ IMPORTANT_SERVER_FILES="docker_start_server.sh
   server_log.txt
   start_server.sh
   server_env
+  server_env.example
   $SERVER_LOGFILE"
 
