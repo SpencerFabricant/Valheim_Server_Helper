@@ -1,9 +1,5 @@
 #!/bin/bash
 source server/server_env
 
-IMPORTANT_SERVER_FILES="docker_start_server.sh
-  start_server.sh
-  server_env
-  server_env.example
-  $SERVER_LOGFILE"
+IMPORTANT_SERVER_FILES="server_env $SERVER_LOGFILE"
 
