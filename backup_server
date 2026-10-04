@@ -12,7 +12,7 @@ if [[ $1 == "--no-docker" ]]; then
 	downup_docker=
 fi
 
-if [ ! -d backups ]; then mkdir backups; fi
+if [ ! -d ${BACKUP_DIR} ]; then mkdir -p ${BACKUP_DIR}; fi
 if [ ! -d saves ]; then mkdir saves; fi
 if [ ! -f "server/$SERVER_LOG" ]; then touch "server/$SERVER_LOG"; fi
 if [ $downup_docker ]; then
@@ -24,7 +24,7 @@ for f in $IMPORTANT_SERVER_FILES; do
 	cp server/$f important_files/$f
 done
 
-tar -czf backups/saves_$(date '+%Y-%m-%d_%H.%M.%S').gz saves important_files
+tar -czf ${BACKUP_DIR}/saves_$(date '+%Y-%m-%d_%H.%M.%S').gz saves important_files
 rm -rf important_files
 # unzip with `tar -xzf file.gz`
 if [ $downup_docker ]; then

@@ -5,3 +5,7 @@ SERVER_PASSWORD=thisisthepasswordpleasechangeit
 
 # Relative path only.  No spaces
 SERVER_LOGFILE=valheim_server.log
+
+# This should not be in the same directory as the git repo
+# lest a `git clean -xdf` delete all backups
+BACKUP_DIR=~/.valheim_backups
