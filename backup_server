@@ -2,7 +2,11 @@
 
 source .common_env
 
-downup_docker="TRUE"
+downup_docker=
+
+if [[ $1 == "--downup-docker" ]]; then
+	downup_docker="TRUE"
+fi
 
 if [[ $1 == "--no-docker" ]]; then
 	downup_docker=
@@ -11,7 +15,7 @@ fi
 if [ ! -d backups ]; then mkdir backups; fi
 if [ ! -d saves ]; then mkdir saves; fi
 if [ ! -f "server/$SERVER_LOG" ]; then touch "server/$SERVER_LOG"; fi
-if [ $downup_docker ]; then
+f [ $downup_docker ]; then
 	docker stop valheim_server
 fi
 
