@@ -1,0 +1,1 @@
+cat server/valheim_server.log | grep "Got character"
