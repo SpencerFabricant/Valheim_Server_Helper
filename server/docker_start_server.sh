@@ -13,6 +13,7 @@ fi
 docker run -it -d \
 	-v "${DOCKER_DATA_VOLUME}:/root/.config/unity3d/IronGate/Valheim" \
 	-v "$PWD:/irongate" \
+	--restart unless-stopped \
 	--name valheim_server \
 	"${DOCKER_IMAGE}" \
 	./start_server.sh
